@@ -1,0 +1,44 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.products-container {
+  display: grid;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+
+.product-card {
+  width: 200px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+.product-card:hover button {
+  display: block;
+}
+.product-card button {
+  display: none;
+}
+
+/*# sourceMappingURL=App.css.map */
