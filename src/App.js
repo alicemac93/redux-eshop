@@ -1,10 +1,9 @@
 import './App.css';
 import SearchBar from './components/SearchBar';
 import Products from './components/ProductsList';
-import Cart from './components/Cart';
+import Cart from './features/Cart/Cart';
 
 function App({ state, dispatch }) {
-  console.log(state)
   return (
     <div className="App">
       <SearchBar />
@@ -13,7 +12,7 @@ function App({ state, dispatch }) {
         dispatch={dispatch}
       />
       <Cart
-        products={state}
+        cart={state.cart}
         dispatch={dispatch} />
     </div>
   );
