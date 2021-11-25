@@ -28,15 +28,18 @@ export const CartReducer = (Cart = initialState, action) => {
         case 'deleteItem/Cart':
             const name = action.payload;
             const currentQuantity = Cart[name].quantity;
+            let itemPrice = Cart[name].price;
             let newQuantity;
             let newCart;
 
             if (currentQuantity > 0) {
+                console.log('yes')
                 newQuantity = currentQuantity - 1;
                 newCart = {
                     ...Cart,
                     [name]: {
-                        quantity: newQuantity
+                        quantity: newQuantity,
+                        price: itemPrice--
                     }
                 }
             }
