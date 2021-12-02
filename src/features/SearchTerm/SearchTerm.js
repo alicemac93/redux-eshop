@@ -1,7 +1,10 @@
 import React from 'react'
-import { setSearchTerm, clearSearchTerm } from '../SearchTerm/SearchTermSlice';
+import { setSearchTerm, clearSearchTerm, selectSearchTerm } from '../SearchTerm/SearchTermSlice';
+import { useSelector, useDispatch } from 'react-redux';
 
-function SearchBar({ searchTerm, dispatch }) {
+function SearchBar() {
+    const dispatch = useDispatch();
+    const searchTerm = useSelector(selectSearchTerm);
 
     const handleSearchHandler = (e) => {
         dispatch(setSearchTerm(e.target.value));

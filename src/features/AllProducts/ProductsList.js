@@ -1,9 +1,17 @@
 import React, { useEffect } from 'react'
-import Product from './Product';
-import { loadProducts } from '../features/allProductsSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import Product from '../../components/Product';
+import { selectSearchTerm } from '../SearchTerm/SearchTermSlice';
+import { loadProducts, selectAllProducts, selectFilteredProducts, selectSearchedProducts } from './allProductsSlice';
 
 
-function Products({ products, dispatch }) {
+function Products() {
+    const dispatch = useDispatch();
+    const allProducts = useSelector(selectAllProducts)
+    const selectedProducts = useSelector(selectSearchedProducts);
+    const filteredProducts = useSelector(selectFilteredProducts);
+
+    const products = filteredProducts === allProducts ? selectedProducts : filteredProducts;
 
     useEffect(() => {
         const getData = async () => {
@@ -24,7 +32,6 @@ function Products({ products, dispatch }) {
         <div className="products-container">
             {products.map(product =>
                 <Product
-                    dispatch={dispatch}
                     id={product.id}
                     key={product.id}
                     title={product.title}

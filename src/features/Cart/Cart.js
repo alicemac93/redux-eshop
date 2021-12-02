@@ -1,5 +1,6 @@
 import React from 'react'
-import { handleItemDeletion } from './selectedProductsSlice';
+import { handleItemDeletion, selectCart } from './selectedProductsSlice';
+import { useSelector, useDispatch } from 'react-redux';
 
 const Ajv = require("ajv")
 const ajv = new Ajv()
@@ -14,7 +15,10 @@ const schema = {
     additionalProperties: false
 }
 
-function Cart({ cart, dispatch }) {
+function Cart() {
+
+    const dispatch = useDispatch();
+    const cart = useSelector(selectCart)
 
     const calculatedTotal = () => {
         let total;
@@ -25,11 +29,12 @@ function Cart({ cart, dispatch }) {
                 throw new ajv.errorsText()
             }
             const reducer = (previousValue, currentValue) => previousValue + currentValue;
-            total = values.map(value => value.price * value.quantity).reduce(reducer);
+            total = values?.map(value => value.price * value.quantity).reduce(reducer);
 
         } catch (e) {
             console.log(e)
         }
+
         return total
     }
 
@@ -43,9 +48,13 @@ function Cart({ cart, dispatch }) {
         <div className="cart">
             <div className="cart-articles">
                 {titles?.map(name =>
-                    <li className='cart-item' key={name}>{name}
-                        <span>{cart[name].price}</span>
-                        <span>{cart[name].quantity}</span>
+                    <li className="cart-item"
+                        key={name}>
+                        {name}
+                        <div className="cart-item-add-info">
+                            <span>{cart[name].price}$</span>
+                            <span>Qty: {cart[name].quantity}</span>
+                        </div>
                         <button onClick={() => handleItem(name)}>X</button>
                     </li>)
                 }

@@ -24,4 +24,4 @@ export const clearSearchTerm = () => {
     }
 }
 
-export const selectSearchTerm = (state) => state.searchTerm;
+export const selectSearchTerm = state => state.searchTerm;

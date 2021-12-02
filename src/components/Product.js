@@ -1,10 +1,11 @@
 import React from 'react'
 import { handleCartSelection } from '../features/Cart/selectedProductsSlice';
+import { useDispatch } from 'react-redux';
 
-function Product(products) {
+function Product(product) {
+    const dispatch = useDispatch();
+    const { title, imageSrc, price } = product
 
-    const { title, imageSrc, price } = products
-    const { dispatch } = products
 
     const handleSelection = (product) => {
         dispatch(handleCartSelection(product))
@@ -15,9 +16,9 @@ function Product(products) {
             <img style={{ "height": "100px" }} src={imageSrc} alt="product" />
             <div className="product-card-info">
                 <h3>{title}</h3>
-                <p>{price} $</p>
+                <p className="product-card-info-price">{price} $</p>
             </div>
-            <button className="addArticle" onClick={() => { handleSelection(products) }}>ADD TO CART</button>
+            <button className="addArticle" onClick={() => { handleSelection(product) }}>ADD TO CART</button>
         </article>
     );
 }
